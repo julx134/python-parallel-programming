@@ -90,7 +90,8 @@ def draw_path(path_i, rover_num, row, col):
     rover_pos = {'x': 0, 'y': 0, 'dir': 'S'}
 
     i = 0
-    outer_bounds = len(path[0]) - 1
+    outer_x_bounds = row-1
+    outer_y_bounds = col-1
     x = rover_pos['x']
     y = rover_pos['y']
     path[x][y] = '*'
@@ -106,7 +107,7 @@ def draw_path(path_i, rover_num, row, col):
             case 'M':  # move forward
                 match rover_pos['dir']:
                     case 'S':
-                        if rover_pos['x'] + 1 <= outer_bounds:
+                        if rover_pos['x'] + 1 <= outer_x_bounds:
                             rover_pos['x'] += 1
                     case 'N':
                         if rover_pos['x'] - 1 >= 0:
@@ -115,7 +116,7 @@ def draw_path(path_i, rover_num, row, col):
                         if rover_pos['y'] - 1 >= 0:
                             rover_pos['y'] -= 1
                     case 'E':
-                        if rover_pos['y'] + 1 <= outer_bounds:
+                        if rover_pos['y'] + 1 <= outer_y_bounds:
                             rover_pos['y'] += 1
             case 'L':  # turn left
                 match rover_pos['dir']:
@@ -177,7 +178,7 @@ def rover_disarm_mines(mine_list, rover_num, row, col):
             case 'M':  # move forward
                 match rover_pos['dir']:
                     case 'S':
-                        if rover_pos['x'] + 1 <= outer_y_bounds:
+                        if rover_pos['x'] + 1 <= outer_x_bounds:
                             rover_pos['x'] += 1
                     case 'N':
                         if rover_pos['x'] - 1 >= 0:
@@ -186,7 +187,7 @@ def rover_disarm_mines(mine_list, rover_num, row, col):
                         if rover_pos['y'] - 1 >= 0:
                             rover_pos['y'] -= 1
                     case 'E':
-                        if rover_pos['y'] + 1 <= outer_x_bounds:
+                        if rover_pos['y'] + 1 <= outer_y_bounds:
                             rover_pos['y'] += 1
             case 'L':  # turn left
                 match rover_pos['dir']:
@@ -252,7 +253,7 @@ def rover_disarm_mines_parallel(mine_list, rover_num, row, col):
             case 'M':  # move forward
                 match rover_pos['dir']:
                     case 'S':
-                        if rover_pos['x'] + 1 <= outer_bounds:
+                        if rover_pos['x'] + 1 <= outer_x_bounds:
                             rover_pos['x'] += 1
                     case 'N':
                         if rover_pos['x'] - 1 >= 0:
@@ -261,7 +262,7 @@ def rover_disarm_mines_parallel(mine_list, rover_num, row, col):
                         if rover_pos['y'] - 1 >= 0:
                             rover_pos['y'] -= 1
                     case 'E':
-                        if rover_pos['y'] + 1 <= outer_bounds:
+                        if rover_pos['y'] + 1 <= outer_y_bounds:
                             rover_pos['y'] += 1
             case 'L':  # turn left
                 match rover_pos['dir']:
