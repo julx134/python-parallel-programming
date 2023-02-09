@@ -13,6 +13,7 @@ ith rover has traversed in the map.txt file. If the rover fails to dig up a mine
 
 The threading module is used to take advantage of Python parallel programming where 10 threads are spawned where each thread runs the function to draw the path.
 The result is shown below:
+
 ![](Part_I_result.jpg)
 
 ### Part II, 
@@ -25,4 +26,5 @@ SHA-256 hashing function. A mine will disarm whenever the resulting hash has a p
 Since Python threading module does not allow for true parallelism due to the Global Interpreter Lock (GIL), the multiprocessing module is utilized. Processes are spawned
 and contains their own GIL which effectively works around the main thread's GIL and executes each disarm command.
 The result is shown below:
+
 ![](Part_II_result.jpg)
