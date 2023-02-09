@@ -36,7 +36,7 @@ def disarm_mine(serial_no):
     # note: we increment pin instead of using random to make sure results are reproducible
     # i.e. same time pin is found vs. random time generating random pins
     pin = 0
-    success_code = '0' * 4
+    success_code = '0' * 6
     mine_key = str(pin) + serial_no
     while not (hash_ := sha256(f'{mine_key}'.encode()).hexdigest()).startswith(success_code):
         pin += 1
@@ -90,8 +90,8 @@ def draw_path(path_i, rover_num, row, col):
     rover_pos = {'x': 0, 'y': 0, 'dir': 'S'}
 
     i = 0
-    outer_x_bounds = row-1
-    outer_y_bounds = col-1
+    outer_x_bounds = row - 1
+    outer_y_bounds = col - 1
     x = rover_pos['x']
     y = rover_pos['y']
     path[x][y] = '*'
@@ -158,14 +158,14 @@ def rover_disarm_mines(mine_list, rover_num, row, col):
     rover_moves = get_rover_moves(rover_num)
 
     # copy over list
-    path = [['0' for x in range(row)] for j in range(col)]
+    path = [['0' for x in range(col)] for j in range(row)]
 
     # variable to track rover position
     rover_pos = {'x': 0, 'y': 0, 'dir': 'S'}
 
     i = 0
-    outer_x_bounds = row-1
-    outer_y_bounds = col-1
+    outer_x_bounds = row - 1
+    outer_y_bounds = col - 1
     x = rover_pos['x']
     y = rover_pos['y']
     path[x][y] = '*'
@@ -243,7 +243,8 @@ def rover_disarm_mines_parallel(mine_list, rover_num, row, col):
     processes = list()
 
     i = 0
-    outer_bounds = len(path[0]) - 1
+    outer_x_bounds = row - 1
+    outer_y_bounds = col - 1
     x = rover_pos['x']
     y = rover_pos['y']
     path[x][y] = '*'
@@ -299,9 +300,9 @@ def rover_disarm_mines_parallel(mine_list, rover_num, row, col):
                 mine_counter += 1
                 continue
 
-        print(x, y)
+        x = rover_pos['x']
+        y = rover_pos['y']
         path[x][y] = '*'
-        print(np.matrix(path))
         i += 1
 
     #wait for all processes to finish before continuing
